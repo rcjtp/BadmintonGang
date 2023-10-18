@@ -1,15 +1,50 @@
-import 'package:badmintongang/cilpper2.dart';
-import 'package:badmintongang/clipper.dart';
-import 'package:badmintongang/signup.dart';
+import 'package:badmintongang/page/cilpper2.dart';
+import 'package:badmintongang/page/clipper.dart';
+import 'package:badmintongang/page/login.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var cofirmPassword = TextEditingController();
+  var namecontroller = TextEditingController();
+
+  Widget _buildName() {
+      return Container(
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(3, 3),
+              blurRadius: 6,
+              color: Colors.grey.shade400,
+            ),
+          ],
+        ),
+        child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "กรอกชื่อ-นามสกุล";
+            }
+          },
+          controller: namecontroller,
+          decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14),
+              prefixIcon: Icon(Icons.person_sharp),
+              hintText: 'กรอกชื่อ-นามสกุล'),
+        ),
+      );
+    }
 
     Widget _buildEmail() {
       return Container(
@@ -28,7 +63,7 @@ class LoginScreen extends StatelessWidget {
         child: TextFormField(
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Enter your Email";
+              return "กรอกอีเมลของคุณ";
             }
           },
           controller: emailController,
@@ -36,7 +71,7 @@ class LoginScreen extends StatelessWidget {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(Icons.email),
-              hintText: 'Enter your Email'),
+              hintText: 'กรอกอีเมลของคุณ'),
         ),
       );
     }
@@ -58,7 +93,7 @@ class LoginScreen extends StatelessWidget {
         child: TextFormField(
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Enter your Password";
+              return "กรอกรหัสผ่านของคุณ";
             }
           },
           controller: passwordController,
@@ -66,11 +101,43 @@ class LoginScreen extends StatelessWidget {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(Icons.lock),
-              hintText: 'Enter your Password'),
+              hintText: 'กรอกรหัสผ่านของคุณ'),
         ),
       );
     }
 
+    Widget _buildConfirmPassword() {
+      return Container(
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(3, 3),
+              blurRadius: 6,
+              color: Colors.grey.shade400,
+            ),
+          ],
+        ),
+        child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "ยืนยันรหัสผ่านอีกครั้ง";
+            }
+          },
+          controller: cofirmPassword,
+          decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14),
+              prefixIcon: Icon(Icons.lock),
+              hintText: 'ยืนยันรหัสผ่านอีกครั้ง'),
+        ),
+      );
+    }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
@@ -95,7 +162,7 @@ class LoginScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'เข้าสู่ระบบ',
+                      'สมัครบัญชี',
                       style:
                           TextStyle(fontWeight: FontWeight.w800, fontSize: 26),
                     ),
@@ -103,7 +170,7 @@ class LoginScreen extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      'กรุณาเข้าสู่บัญชีที่ใช้งาน',
+                      'กรุณาสมัครบัญชีเพื่อเข้าใช้งาน',
                       style:
                           TextStyle(fontWeight: FontWeight.w400, fontSize: 17),
                     ),
@@ -120,6 +187,10 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
+                _buildName(),
+                const SizedBox(
+                  height: 20,
+                ),
                 _buildEmail(),
                 const SizedBox(
                   height: 20,
@@ -128,13 +199,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
-                  'FORGET',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromARGB(255, 4, 100, 84)),
-                ),
+                _buildConfirmPassword(),
                 const SizedBox(
                   height: 20,
                 ),
@@ -156,7 +221,7 @@ class LoginScreen extends StatelessWidget {
                         width: 20,
                       ),
                       Text(
-                        'เข้าสู่ระบบ',
+                        'สมัครบัญชี',
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 17,
@@ -173,13 +238,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 200,
+                  height: 100,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'ยังไม่มีบัญชีผู้ใช้งาน?',
+                      'มีบัญชีผู้ใช้งานแล้ว?',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
@@ -187,10 +252,10 @@ class LoginScreen extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => SignUp()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
                       }, 
                       child: Text(
-                        'สมัครบัญชีเข้าใช้งาน',
+                        'เข้าสู่บัญชีผู้ใช้งาน',
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,

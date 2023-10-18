@@ -1,5 +1,5 @@
-import 'package:badmintongang/home.dart';
-import 'package:badmintongang/login.dart';
+import 'package:badmintongang/page/home.dart';
+import 'package:badmintongang/page/login.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {

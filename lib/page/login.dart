@@ -1,50 +1,15 @@
-import 'package:badmintongang/cilpper2.dart';
-import 'package:badmintongang/clipper.dart';
-import 'package:badmintongang/login.dart';
+import 'package:badmintongang/page/cilpper2.dart';
+import 'package:badmintongang/page/clipper.dart';
+import 'package:badmintongang/page/signup.dart';
 import 'package:flutter/material.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var cofirmPassword = TextEditingController();
-  var namecontroller = TextEditingController();
-
-  Widget _buildName() {
-      return Container(
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(3, 3),
-              blurRadius: 6,
-              color: Colors.grey.shade400,
-            ),
-          ],
-        ),
-        child: TextFormField(
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "กรอกชื่อ-นามสกุล";
-            }
-          },
-          controller: namecontroller,
-          decoration: const InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.person_sharp),
-              hintText: 'กรอกชื่อ-นามสกุล'),
-        ),
-      );
-    }
+  Widget build(BuildContext context) {
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
 
     Widget _buildEmail() {
       return Container(
@@ -63,7 +28,7 @@ class _SignUpState extends State<SignUp> {
         child: TextFormField(
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "กรอกอีเมลของคุณ";
+              return "Enter your Email";
             }
           },
           controller: emailController,
@@ -71,7 +36,7 @@ class _SignUpState extends State<SignUp> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(Icons.email),
-              hintText: 'กรอกอีเมลของคุณ'),
+              hintText: 'Enter your Email'),
         ),
       );
     }
@@ -93,7 +58,7 @@ class _SignUpState extends State<SignUp> {
         child: TextFormField(
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "กรอกรหัสผ่านของคุณ";
+              return "Enter your Password";
             }
           },
           controller: passwordController,
@@ -101,43 +66,11 @@ class _SignUpState extends State<SignUp> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14),
               prefixIcon: Icon(Icons.lock),
-              hintText: 'กรอกรหัสผ่านของคุณ'),
+              hintText: 'Enter your Password'),
         ),
       );
     }
 
-    Widget _buildConfirmPassword() {
-      return Container(
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(3, 3),
-              blurRadius: 6,
-              color: Colors.grey.shade400,
-            ),
-          ],
-        ),
-        child: TextFormField(
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "ยืนยันรหัสผ่านอีกครั้ง";
-            }
-          },
-          controller: cofirmPassword,
-          decoration: const InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.lock),
-              hintText: 'ยืนยันรหัสผ่านอีกครั้ง'),
-        ),
-      );
-    }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
@@ -162,7 +95,7 @@ class _SignUpState extends State<SignUp> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'สมัครบัญชี',
+                      'เข้าสู่ระบบ',
                       style:
                           TextStyle(fontWeight: FontWeight.w800, fontSize: 26),
                     ),
@@ -170,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                       height: 10,
                     ),
                     Text(
-                      'กรุณาสมัครบัญชีเพื่อเข้าใช้งาน',
+                      'กรุณาเข้าสู่บัญชีที่ใช้งาน',
                       style:
                           TextStyle(fontWeight: FontWeight.w400, fontSize: 17),
                     ),
@@ -187,10 +120,6 @@ class _SignUpState extends State<SignUp> {
                 const SizedBox(
                   height: 25,
                 ),
-                _buildName(),
-                const SizedBox(
-                  height: 20,
-                ),
                 _buildEmail(),
                 const SizedBox(
                   height: 20,
@@ -199,7 +128,13 @@ class _SignUpState extends State<SignUp> {
                 const SizedBox(
                   height: 20,
                 ),
-                _buildConfirmPassword(),
+                const Text(
+                  'FORGET',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromARGB(255, 4, 100, 84)),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -221,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                         width: 20,
                       ),
                       Text(
-                        'สมัครบัญชี',
+                        'เข้าสู่ระบบ',
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 17,
@@ -238,13 +173,13 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 const SizedBox(
-                  height: 100,
+                  height: 200,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'มีบัญชีผู้ใช้งานแล้ว?',
+                      'ยังไม่มีบัญชีผู้ใช้งาน?',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
@@ -252,10 +187,10 @@ class _SignUpState extends State<SignUp> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => SignUp()));
                       }, 
                       child: Text(
-                        'เข้าสู่บัญชีผู้ใช้งาน',
+                        'สมัครบัญชีเข้าใช้งาน',
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
